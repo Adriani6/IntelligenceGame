@@ -12,8 +12,11 @@
 # Import tkinter
 import tkinter
 from tkinter import Label, Entry, Button
+from countries import XML
+from towns import City_XML
 # Define tkinter
 gui = tkinter.Tk()
+
 
 def main():
     # Start the GUI
@@ -32,13 +35,22 @@ def GUI():
 
     Label(gui, text="").grid(row=1, column=0, rowspan=5, columnspan=5, pady=50)
 
-    entry_country = Entry(gui).grid(row=7, column=0, padx=5)
-    entry_town = Entry(gui).grid(row=7, column=1, padx=5)
-    entry_plant = Entry(gui).grid(row=7, column=2, padx=5)
-    entry_name = Entry(gui).grid(row=7, column=3, padx=5)
+    entry_country = Entry(gui)
+    entry_country.grid(row=7, column=0, padx=5)
+    entry_town = Entry(gui)
+    entry_town.grid(row=7, column=1, padx=5)
+    entry_plant = Entry(gui)
+    entry_plant.grid(row=7, column=2, padx=5)
+    entry_name = Entry(gui)
+    entry_name.grid(row=7, column=3, padx=5)
 
-    Button(gui, text="Finish Round").grid(row=7, column=4)
+    button = Button(gui, text="Finish Round", command=lambda: finished(entry_country.get())).grid(row=7, column=4)
+
+
     gui.mainloop()
 
+def finished(country):
+    XML.searchCountryInDB(country)
+    City_XML.searchCityInDB("city")
 if __name__ == '__main__':
     main()

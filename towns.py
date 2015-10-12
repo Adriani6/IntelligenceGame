@@ -8,9 +8,10 @@
 # Copyright:   (c) Adrian 2015
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
+import xml.etree.ElementTree as ET
+class City_XML():
 
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()
+    tree = ET.parse('data/CitiesData.xml')
+    root = tree.getroot()
+    for city_loop in root.iter("value"):
+        print(city_loop.text)
